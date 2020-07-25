@@ -3,20 +3,36 @@ import {
     Text,
     View,
     Image,
-    StyleSheet
+    StyleSheet,
+    TouchableOpacity,
+    Alert
 } from 'react-native'
 
 export default function CategoryListItem(props) {
     return (
-        <View style={style.container}> 
-           <Text style={style.title}>{props.title}</Text>
-           <Image source={props.imageUri} style={style.categoryImage}></Image> 
-        </View>
+        <TouchableOpacity activeOpacity={0.8} onPress={(event => {
+            Alert.alert( "Alert Title",
+            "My Alert Msg",
+            [
+              {
+                text: "Cancel",
+                onPress: () => console.log("Cancel Pressed"),
+                style: "cancel"
+              },
+              { text: "OK", onPress: () => console.log("OK Pressed") }
+            ],
+            { cancelable: false });
+        })}>
+            <View style={style.container}>
+                <Text style={style.title}>{props.title}</Text>
+                <Image source={props.imageUri} style={style.categoryImage}></Image>
+            </View>
+        </TouchableOpacity>
     )
 }
 
 const style = StyleSheet.create({
-    container:{
+    container: {
         alignItems: "center",
         backgroundColor: '#FFF',
 
@@ -32,7 +48,7 @@ const style = StyleSheet.create({
             height: 0
         },
         elevation: 2,
-       
+
     },
     categoryImage: {
         width: 64,
